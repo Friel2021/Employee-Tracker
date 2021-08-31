@@ -1,11 +1,11 @@
 const inquirer = require ("inquirer");
 
-const mysql = require('mysql2');
+const mysql2 = require('mysql2');
 const cTable = require("console.table");
 
 // Connect to database
 
-const connection = mysql.createConnection({
+connection = mysql2.createConnection({
   host: "localhost",
 
   port: "3306",
@@ -14,7 +14,7 @@ const connection = mysql.createConnection({
 
   password: "Password",
 
-  database: "employee_db"
+  database: "employee_db",
 
 });
 
@@ -75,14 +75,14 @@ inquirer
     break;
   }
 })
-}
+};
 
 function viewAllDepartment() {
   connection.query ("SELECT * FROM departments", function(err, res) {
 console.table(res);
 start ();
 })
-}
+};
 
 function viewAllRoles() {
   connection.query("Select roles.*, departments.name FROM roles LEFT JOIN departments ON departments.id = roles.department_id", function (err, res) {
@@ -90,7 +90,7 @@ function viewAllRoles() {
   console.table(res);
   start();
 })
-}
+};
 
 function viewAllEmployees() {
   connection.query("SELECT employees.first_name, employees.last_name, roles.title AS \"role\", managers.first_name AS \"manager\" FROM employees LEFT JOIN roles ON employees.role_id = roles.id LEFT JOIN employees managers ON employees.manager_id = managers.id GROUP by employees.id",
@@ -99,7 +99,7 @@ function viewAllEmployees() {
     console.table(res);
     start();
   });
-  }
+  };
 
 function addDepartment() {
   inquirer
@@ -125,7 +125,7 @@ function addDepartment() {
   }
     )
 })
-}
+};
 
 function addRole(){
   let departments= [];
@@ -195,7 +195,24 @@ connection.query("SELECT first_name, last_name, id FROM employees",
 function(err, res) {
 let employees = res.map(employee => ({name: empoloyee.first_name + " " + employee.last_name, value: employee.id}))
 
+inquirer
+.prompt ([
+{
+  type: "list",
+  name: "employeeName",
+  message: "Which employees role would you like to update?",
+  choices: "employees"
+},
+{
+  type: "input",
+  name: "role",
+  message: "What is your new role?"
 }
-
-
-}
+])
+.then (function(res) {
+connection.query("UPDATE employees SET role_id = ${res.role} WHERE id = ${res.employeeName}",
+function (err, res){
+  console.log(res);
+  start();
+})
+};
