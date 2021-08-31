@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "description": "Employee Management System",
   "main": "index.js",
- 
   "dependencies": {
     "console.table": "^0.10.0",
     "inquirer": "^7.0.3",
     "mysql2": "^2.2.5"
-
   },
   "devDependencies": {},
   "scripts": {

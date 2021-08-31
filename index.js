@@ -1,7 +1,7 @@
 const inquirer = require ("inquirer");
-// Import and require mysql2
+
 const mysql = require('mysql2');
-const ctable = require('console.table');
+const cTable = require("console.table");
 
 // Connect to database
 
@@ -148,12 +148,54 @@ inquirer
     name: "salary",
     message: "What is the salary for your new role?"
  },
- {
-
- }
 ])
+},
+
+function addEmployee() {
+console.log("Inserting a new employee. \n");
+inquirer
+.prompt ([
+  {
+    type: "input",
+    message: "Please enter the first name",
+    name: "first_name",
+  },
+  {
+    type: "input",
+    message: "Please enter the last name",
+    name: "last_name",
+  },
+  {
+    type: "list",
+    message: "What is your new employees role?",
+    choices: [1,2,3]
+  },
+  {
+    type: "input",
+    message: "What is their managers name?",
+    name: "manager_id"
+  }
+])
+.then (function(res) {
+  const query = connection.query ("INSERT INTO employees set?",res,
+  function(err, res) {
+    if (err) throw err;
+    console.log ("Employee has been added! \n");
+    start();
+  }
+  
+  );
+
+})
+},
+
+function updateEmployeeRole(){
+
+connection.query("SELECT first_name, last_name, id FROM employees",
+function(err, res) {
+let employees = res.map(employee => ({name: empoloyee.first_name + " " + employee.last_name, value: employee.id}))
 
 }
 
 
-
+}
