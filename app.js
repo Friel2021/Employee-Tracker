@@ -1,13 +1,14 @@
 const inquirer = require ("inquirer");
 // Import and require mysql2
 const mysql = require('mysql2');
+const consoleTable = require("console.table");
 
 // Connect to database
 
 const db = mysql.createConnection({
   host: "localhost",
 
-  port: "3001",
+  port: "3306",
 
   user: "root",
 
@@ -20,26 +21,41 @@ const db = mysql.createConnection({
 db.connect(function(err) {
 if (err) throw err;
 console.log("connected as id " + db.threadID + "\n");
-  
-})
-
-
-
-
-
-// Connect to database
-
-
-// Query database
-db.query('SELECT * FROM students', function (err, results) {
-  console.log(results);
+  start();
 });
 
-// Default response for any other request (Not Found)
-app.use((req, res) => {
-  res.status(404).end();
-});
+function start () {
+inquirer
+.prompt ([
+  {
+    type: "List",
+    message: "Please select an option",
+    name: "start",
+    choices: [
+      "View all departments",
+      "View all roles",
+      "View all employees",
+      "Add a department",
+      "Add a role",
+      "Add an employee",
+      "Update employee role",
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+    ]
+
+
+
+
+
+
+
+
+  }
+
+
+
+
+
+])
+
+
+}
