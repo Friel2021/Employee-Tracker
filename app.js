@@ -127,7 +127,33 @@ function addDepartment() {
 })
 }
 
-function add
+function addRole(){
+  let departments= [];
+connection.query("SELECT * FROM departments",
+function (err, res) {
+  if (err) throw err;
+  for (let i=0; i <res.length; i++){
+    res [i].first_name + " " + res[i].last_name
+    departments.push({name: res[i].name, value: res[i].id});
+}
+inquirer
+.prompt([
+  {
+    type: "input",
+    name: "title",
+    message: "What role are you adding?"
+  },
+  {
+    type: "input",
+    name: "salary",
+    message: "What is the salary for your new role?"
+ },
+ {
+
+ }
+])
+
+}
 
 
 
