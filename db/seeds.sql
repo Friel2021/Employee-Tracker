@@ -1,5 +1,5 @@
 INSERT INTO departments (name)
-VALUES ("Regional Manger"), ("Sales"), ("Accounting");
+VALUES ("Regional Manager"), ("Sales"), ("Accounting");
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES ("Michael", "Scott", 1, 2), ("Dwight", "Shrute", 2, 1,), ("Oscar", "Martinez", 3, 2);

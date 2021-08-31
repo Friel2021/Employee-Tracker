@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
 
 });
 
-db.connect(function(err) {
+connection.connect(function(err) {
 if (err) throw err;
 console.log("connected as id " + db.threadID + "\n");
   start();
@@ -74,4 +74,60 @@ inquirer
     updateEmployeeRole();
     break;
   }
+})
 }
+
+function viewAllDepartment() {
+  connection.query ("SELECT * FROM departments", function(err, res) {
+console.table(res);
+start ();
+})
+}
+
+function viewAllRoles() {
+  connection.query("Select roles.*, departments.name FROM roles LEFT JOIN departments ON departments.id = roles.department_id", function (err, res) {
+  if (err) throw err;
+  console.table(res);
+  start();
+})
+}
+
+function viewAllEmployees() {
+  connection.query("SELECT employees.first_name, employees.last_name, roles.title AS \"role\", managers.first_name AS \"manager\" FROM employees LEFT JOIN roles ON employees.role_id = roles.id LEFT JOIN employees managers ON employees.manager_id = managers.id GROUP by employees.id",
+  function (err, res) {
+    if (err) throw err;
+    console.table(res);
+    start();
+  });
+  }
+
+function addDepartment() {
+  inquirer
+  .prompt ([
+    {
+      type: "input",
+      name: "departmentName",
+      message: "What department would you like to add?"
+    }
+  ])
+  .then(function(res) {
+    console.log(res);
+    const query = connection.query(
+      "INSERT INTO departments SET ?",
+  {
+    name: res.departmentName
+  },
+  function(err, res) {
+    connection.query("SELECT * FROM departments", function(err, res){
+      console.table(res),
+      start();
+    })
+  }
+    )
+})
+}
+
+function add
+
+
+
