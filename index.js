@@ -14,7 +14,7 @@ const db = new Database({
   Start of calls to the database 
 */
 async function getManagerNames() {
-    let query = "SELECT * FROM employee WHERE manager_id IS NULL";
+    let query = "SELECT * FROM employee manager_id";
 
     const rows = await db.query(query);
     //console.log("number of rows returned " + rows.length);
