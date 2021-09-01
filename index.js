@@ -1,5 +1,5 @@
 const inquirer = require("inquirer");
-let Database = require("./db/connection");
+let Database = require("./config/connection");
 let cTable = require("console.table");
 
 const db = new Database({
