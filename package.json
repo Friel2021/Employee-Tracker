@@ -4,10 +4,12 @@
   "description": "Employee Management System",
   "main": "index.js",
   "dependencies": {
+    "boxen": "^4.0.0",
+    "chalk": "^2.4.2",
     "console.table": "^0.10.0",
+    "dotenv": "^8.6.0",
     "inquirer": "^7.0.3",
-    "mysql2": "^2.2.5",
-    "dotenv": "^6.3.5"
+    "mysql2": "^2.2.5"
   },
   "devDependencies": {},
   "scripts": {
