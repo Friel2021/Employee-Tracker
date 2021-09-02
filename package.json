@@ -8,6 +8,7 @@
     "chalk": "^2.4.2",
     "console.table": "^0.10.0",
     "dotenv": "^8.6.0",
+    "figlet": "^1.5.2",
     "inquirer": "^7.0.3",
     "mysql2": "^2.2.5"
   },

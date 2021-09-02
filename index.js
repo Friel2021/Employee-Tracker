@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 let Database = require("./config/connection");
-const chalk = require('chalk');
 require('dotenv').config();
+var figlet = require('figlet');
 
 const db = new Database({
     host: "localhost",
@@ -11,14 +11,20 @@ const db = new Database({
     database: "employee"
   });
   
-/*
-  Start of calls to the database 
-*/
+
+console.log(figlet.textSync('Employee Tracker', {
+    font: 'poison',
+    horizontalLayout: 'default',
+    verticalLayout: 'default',
+    width: 95,
+    whitespaceBreak: true
+}));
+
 async function getManagerNames() {
     let query = "SELECT * FROM employee manager_id";
 
     const rows = await db.query(query);
-    //console.log("number of rows returned " + rows.length);
+
     let employeeNames = [];
     for(const employee of rows) {
         employeeNames.push(employee.first_name + " " + employee.last_name);
@@ -29,8 +35,7 @@ async function getManagerNames() {
 async function getRoles() {
     let query = "SELECT title FROM role";
     const rows = await db.query(query);
-    //console.log("Number of rows returned: " + rows.length);
-
+    
     let roles = [];
     for(const row of rows) {
         roles.push(row.title);
@@ -42,7 +47,7 @@ async function getRoles() {
 async function getDepartmentNames() {
     let query = "SELECT name FROM department";
     const rows = await db.query(query);
-    //console.log("Number of rows returned: " + rows.length);
+ 
 
     let departments = [];
     for(const row of rows) {
@@ -52,7 +57,7 @@ async function getDepartmentNames() {
     return departments;
 }
 
-// Given the name of the department, what is its id?
+
 async function getDepartmentId(departmentName) {
     let query = "SELECT * FROM department WHERE department.name=?";
     let res = [departmentName];
@@ -60,7 +65,7 @@ async function getDepartmentId(departmentName) {
     return rows[0].id;
 }
 
-// Given the name of the role, what is its id?
+
 async function getRoleId(roleName) {
     let query = "SELECT * FROM role WHERE role.title=?";
     let res = [roleName];
@@ -68,9 +73,9 @@ async function getRoleId(roleName) {
     return rows[0].id;
 }
 
-// need to find the employee.id of the named manager
+
 async function getEmployeeId(fullName) {
-    // First split the name into first name and last name
+  
     let employee = getFirstAndLastName(fullName);
 
     let query = 'SELECT id FROM employee WHERE employee.first_name=? AND employee.last_name=?';
@@ -92,7 +97,7 @@ async function getEmployeeNames() {
 
 async function viewAllRoles() {
     console.log("");
-    // SELECT * FROM role;
+   
     let query = "SELECT * FROM role";
     const rows = await db.query(query);
     console.table(rows);
@@ -100,7 +105,7 @@ async function viewAllRoles() {
 }
 
 async function viewAllDepartments() {
-    // SELECT * from department;
+    
 
     let query = "SELECT * FROM department";
     const rows = await db.query(query);
@@ -110,15 +115,14 @@ async function viewAllDepartments() {
 async function viewAllEmployees() {
     console.log("");
 
-    // SELECT * FROM employee;
+
     let query = "SELECT * FROM employee";
     const rows = await db.query(query);
     console.table(rows);
 }
 
 async function viewAllEmployeesByDepartment() {
-    // View all employees by department
-    // SELECT first_name, last_name, department.name FROM ((employee INNER JOIN role ON role_id = role.id) INNER JOIN department ON department_id = department.id);
+   
     console.log("");
     let query = "SELECT first_name, last_name, department.name FROM ((employee INNER JOIN role ON role_id = role.id) INNER JOIN department ON department_id = department.id);";
     const rows = await db.query(query);
@@ -140,9 +144,7 @@ function getFirstAndLastName( fullName ) {
 }
 
 async function updateEmployeeRole(employeeInfo) {
-    // Given the name of the role, what is the role id?
-    // Given the full name of the employee, what is their first_name and last_name?
-    // UPDATE employee SET role_id=1 WHERE employee.first_name='Mary Kay' AND employee.last_name='Ash';
+   
     const roleId = await getRoleId(employeeInfo.role);
     const employee = getFirstAndLastName(employeeInfo.employeeName);
 
@@ -156,7 +158,7 @@ async function addEmployee(employeeInfo) {
     let roleId = await getRoleId(employeeInfo.role);
     let managerId = await getEmployeeId(employeeInfo.manager);
 
-    // INSERT into employee (first_name, last_name, role_id, manager_id) VALUES ("Bob", "Hope", 8, 5);
+    
     let query = "INSERT into employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)";
     let res = [employeeInfo.first_name, employeeInfo.last_name, roleId, managerId];
     const rows = await db.query(query, res);
@@ -165,7 +167,7 @@ async function addEmployee(employeeInfo) {
 
 async function removeEmployee(employeeInfo) {
     const employeeName = getFirstAndLastName(employeeInfo.employeeName);
-    // DELETE from employee WHERE first_name="Cyrus" AND last_name="Smith";
+    
     let query = "DELETE from employee WHERE first_name=? AND last_name=?";
     let res = [employeeName[0], employeeName[1]];
     const rows = await db.query(query, res);
@@ -181,7 +183,7 @@ async function addDepartment(departmentInfo) {
 }
 
 async function addRole(roleInfo) {
-    // INSERT into role (title, salary, department_id) VALUES ("Sales Manager", 100000, 1);
+    
     const departmentId = await getDepartmentId(roleInfo.departmentName);
     const salary = roleInfo.salary;
     const title = roleInfo.roleName;
@@ -190,10 +192,6 @@ async function addRole(roleInfo) {
     const rows = await db.query(query, res);
     console.log(`Added role ${title}`);
 }
-
-/* 
-End of calls to the database
-*/
 
 async function mainPrompt() {
     return inquirer
@@ -226,28 +224,28 @@ async function getAddEmployeeInfo() {
             {
                 type: "input",
                 name: "first_name",
-                message: "What is the employee's first name?"
+                message: "What is the new employee's first name?"
             },
             {
                 type: "input",
                 name: "last_name",
-                message: "What is the employee's last name?"
+                message: "What is the new employee's last name?"
             },
             {
                 type: "list",
-                message: "What is the employee's role?",
+                message: "What is the new employee's role?",
                 name: "role",
                 choices: [
-                    // populate from db
+                    
                     ...roles
                 ]
             },
             {
                 type: "list",
-                message: "Who is the employee's manager?",
+                message: "Who is the new employee's manager?",
                 name: "manager",
                 choices: [
-                    // populate from db
+               
                     ...managers
                 ]
             }
@@ -263,7 +261,7 @@ async function getRemoveEmployeeInfo() {
             message: "Which employee do you want to remove?",
             name: "employeeName",
             choices: [
-                // populate from db
+         
                 ...employees
             ]
         }
@@ -300,7 +298,7 @@ async function getRoleInfo() {
             message: "Which department uses this role?",
             name: "departmentName",
             choices: [
-                // populate from db
+              
                 ...departments
             ]
         }
@@ -317,7 +315,7 @@ async function getUpdateEmployeeRoleInfo() {
                 message: "Which employee do you want to update?",
                 name: "employeeName",
                 choices: [
-                    // populate from db
+                    
                     ...employees
                 ]
             },
@@ -326,7 +324,7 @@ async function getUpdateEmployeeRoleInfo() {
                 message: "What is the employee's new role?",
                 name: "role",
                 choices: [
-                    // populate from db
+                   
                     ...roles
                 ]
             }
@@ -395,8 +393,7 @@ async function main() {
 
             case 'Exit': {
                 exitLoop = true;
-                process.exit(0); // successful exit
-                return;
+                process.exit(0); 
             }
 
             default:
@@ -405,7 +402,6 @@ async function main() {
     }
 }
 
-// Close your database connection when Node exits
 process.on("exit", async function(code) {
     await db.close();
     return console.log(`About to exit with code ${code}`);
