@@ -2,7 +2,9 @@
 ![Github licence](http://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Description 
-This application was created to generate a team profile based on user input using the Inquirer module from Node.js and displaying the information on a newly created html page with a style sheet. This project demonstrates use of OOP and TDD using Jest. 
+This application was created to generate an Employee tracker system based on user input using the Inquirer module from Node.js.  An employer will be able to add departments, employees, and roles with their corresponding information using inquirer and prompts.
+
+The user will also be able to view the information thanks to integration with mySQL.
  
 ## Table of Contents
 * [Installation](#installation)
