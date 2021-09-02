@@ -2,7 +2,7 @@
 ![Github licence](http://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Description 
-This application was created to generate an Employee tracker system based on user input using the Inquirer module from Node.js.  An employer will be able to add departments, employees, and roles with their corresponding information using inquirer and prompts.
+This application was created to generate an Employee Tracker system.  An employer will be able to add departments, employees, and roles with their corresponding information using inquirer and prompts.
 
 The user will also be able to view the information thanks to integration with mySQL.
  
