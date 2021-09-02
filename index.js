@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 let Database = require("./config/connection");
-require('dotenv').config();
 var figlet = require('figlet');
+require('dotenv').config();
 
 const db = new Database({
     host: "localhost",
