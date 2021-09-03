@@ -26,7 +26,7 @@ View walk through video here - [Screencastify]()<br>
 <br>
 
 ### Screenshot
-![Employee-Tracker](public/assets/images/Capture.png)
+![Capture](https://user-images.githubusercontent.com/87154134/131943020-a882fe49-1a80-4c2b-acac-84090fbfeb32.PNG)
 
 ## License 
 This project is license under MIT
