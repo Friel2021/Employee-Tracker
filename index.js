@@ -1,7 +1,6 @@
 const inquirer = require("inquirer");
 let Database = require("./config/connection");
 var figlet = require('figlet');
-require('dotenv').config();
 
 const db = new Database({
     host: "localhost",
@@ -48,7 +47,6 @@ async function getDepartmentNames() {
     let query = "SELECT name FROM department";
     const rows = await db.query(query);
  
-
     let departments = [];
     for(const row of rows) {
         departments.push(row.name);
@@ -124,7 +122,7 @@ async function viewAllEmployees() {
 async function viewAllEmployeesByDepartment() {
    
     console.log("");
-    let query = "SELECT first_name, last_name, department.name FROM ((employee INNER JOIN role ON role_id = role.id) INNER JOIN department ON department_id = department.id);";
+    let query = "SELECT first_name, last_name, department.name, salary, FROM ((employee INNER JOIN role ON role_id = role.id) INNER JOIN department ON department_id = department.id);";
     const rows = await db.query(query);
     console.table(rows);
 }

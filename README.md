@@ -17,7 +17,7 @@ The user will also be able to view the information thanks to integration with my
 The user should clone the repository from GitHub and download Node. This application also requires a file system and inquirer module. 
 
 ## Usage 
-Run node index.js from your command line to access the "Employee Tracker" application.
+Run npm start from your command line to access the "Employee Tracker" application.
 View walk through video here - [Screencastify]()<br>
 <img src="./assets/TeamProfile.png">
 
