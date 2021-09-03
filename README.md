@@ -26,7 +26,7 @@ View walk through video here - [Screencastify]()<br>
 <br>
 
 ### Screenshot
-<img src="./assets/images/capture.png">
+![Employee-Tracker](public/assets/images/Capture.png)
 
 ## License 
 This project is license under MIT
