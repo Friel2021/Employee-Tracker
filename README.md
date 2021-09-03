@@ -22,7 +22,7 @@ The user should clone the repository from GitHub and download Node. This applica
 Run npm start from your command line to access the "Employee Tracker" application.
 
 ## Demo
-View walk through video here - [https://drive.google.com/file/d/1MxYCNxLasMayaNp6otcdcDdkxhN2iiFy/view]()<br>
+View walk through video here - https://drive.google.com/file/d/1MxYCNxLasMayaNp6otcdcDdkxhN2iiFy/view<br>
 <br>
 
 ### Screenshot
