@@ -9,6 +9,8 @@ The user will also be able to view the information thanks to integration with my
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
+* [Demo](#demo)
+* [Screenshot](#screenshot)
 * [License](#license)
 * [Contributing](#contributing)
 * [Questions](#questions)
@@ -18,8 +20,13 @@ The user should clone the repository from GitHub and download Node. This applica
 
 ## Usage 
 Run npm start from your command line to access the "Employee Tracker" application.
+
+## Demo
 View walk through video here - [Screencastify]()<br>
-<img src="./assets/TeamProfile.png">
+<br>
+
+### Screenshot
+<img src="./assets/capture.png">
 
 ## License 
 This project is license under MIT
