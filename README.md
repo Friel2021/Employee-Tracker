@@ -26,7 +26,7 @@ View walk through video here - [Screencastify]()<br>
 <br>
 
 ### Screenshot
-<img src="./assets/capture.png">
+<img src="./assets/images/capture.png">
 
 ## License 
 This project is license under MIT
